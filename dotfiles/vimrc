@@ -1,3 +1,49 @@
+call pathogen#infect()
+
 syntax on
 set expandtab
 set tabstop=2
+set relativenumber
+
+let mapleader = ","
+
+inoremap jk <Esc>
+
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+
+" Prompt for a command to run
+map <Leader>rp :PromptVimTmuxCommand<CR>
+
+" Run last command executed by RunVimTmuxCommand
+map <Leader>rl :RunLastVimTmuxCommand<CR>
+
+" Inspect runner pane
+map <Leader>ri :InspectVimTmuxRunner<CR>
+
+" Close all other tmux panes in current window
+map <Leader>rx :CloseVimTmuxPanes<CR>
+
+" Interrupt any command running in the runner pane
+map <Leader>rs :InterruptVimTmuxRunner<CR>
+
+" If text is selected, save it in the v buffer and send that buffer it to tmux
+vmap <LocalLeader>vs "vy :call RunVimTmuxCommand(@v)<CR>
+
+" Select current paragraph and send it to tmux
+nmap <LocalLeader>vs vip<LocalLeader>vs<CR>
+
+set errorformat=%E\ %#[error]\ %#%f:%l:\ %m,%-Z\ %#[error]\ %p^,%-C\ %#[error]\ %m
+set errorformat+=,%W\ %#[warn]\ %#%f:%l:\ %m,%-Z\ %#[warn]\ %p^,%-C\ %#[warn]\ %m
+set errorformat+=,%-G%.%#
+
+" noremap <silent> <Leader>ff :cf /tmp/sbt.quickfix<CR>
+noremap <silent> <Leader>ff :cf target/quickfix/sbt.quickfix<CR>
+noremap <silent> <Leader>fn :cn<CR>
+
